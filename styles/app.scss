@@ -1,0 +1,95 @@
+// imported styleguide resource
+
+* { box-sizing: border-box; }
+body { padding: 20px 0; }
+
+// -----------------------
+
+$card-padding: 25px;
+$border-radius: 3px;
+$featured-color: $blue-01;
+
+h1 { text-align: center; }
+
+.container {
+	display: flex;
+	margin: 20px auto;
+}
+
+.pricingCard {
+	border: 1px solid $gray-03;
+	border-radius: $border-radius;
+	flex: 1;
+	margin: 10px;
+	display: flex;
+	flex-direction: column;
+	padding-bottom: $card-padding;
+	text-align: center;
+}
+
+.pricingCard h2 { margin-bottom: 0; }
+
+.title {
+	background: $gray-07;
+	padding: 20px $card-padding;
+	border-top-left-radius: $border-radius;
+	border-top-right-radius: $border-radius;
+	font-size: 1.7em;
+}
+
+.pricingCard.featured {
+//	color: $featured-color;
+	border-color: $featured-color;
+	background: $gray-08;
+}
+
+.pricingCard.featured .title { 
+	background: $featured-color;
+	color: white;
+}
+
+.pricingCard.featured .bttn {
+	background: $featured-color;
+	color: white;
+	&:hover { background: $blue-02; }
+}
+
+.pricingCard .price-overview {
+	margin-top: 20px;
+	font-weight: bold;
+}
+
+.pricingCard.featured .btn { 
+	background: blue;
+}
+
+.price .price__currency { font-size: 1.7em; padding-right: 3px; }
+.price .price__dollar { font-size: 1.7em; }
+.price .price__cent { font-size: 1em; }
+
+.card {
+	padding: 10px $card-padding 20px;
+}
+
+.price-desc { 
+	font-size: 0.7em;
+	margin-top: 0;
+}
+
+.bttn { 
+	// inherits other styles from template
+	display: block; 
+	text-align: center;
+	
+	position: relative;
+	margin: 0 $card-padding;
+	margin-top: auto;
+	
+	background: none;
+	border: 1px solid $featured-color;
+	color: $featured-color;
+	
+	&:hover { background: $gray-08; }
+}
+
+.toggle-container { text-align: center; }
