@@ -8,20 +8,29 @@ class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      start: false,
+      start: true,
       startTime: 0,
       endTime: 0,
       disabledButton: true,
-      donationText: "Submit Donations",
-      // We should create a state for each hacker option
-      // eq1: true,
-      // eq2: true,
-      // eq3: true,
-      // queryString: "#"
+
+      /* State for currently displayed instruction
+        changed when hovering above hacker panel */
+      instructionDisplayed: null,
+
+      /* Hacking strategies:
+
+        0 for original state
+        1 for service brute force
+        2 for password cracking
+        3 for social engineering
+      
+        Changed when user click on start in the hacker panel */
+      strategy: 0,
     }
 
     this.handleStart = this.handleStart.bind(this);
     this.handleEnd = this.handleEnd.bind(this);
+    this.hackingStart1 = this.hackingStart1.bind(this);
     // this.handleChange = this.handleChange.bind(this);  // checkboxes
   }
 
@@ -34,6 +43,7 @@ class Main extends Component {
 
   handleEnd() {
     // Create Qualtrics Query String
+    // What does this do?
     var link = "https://uchicago.co1.qualtrics.com/jfe/form/SV_dgV556kBNVvZVmC?";
 
     link += "&TimeSpent=" + ((Date.now() - this.state.startTime) / 1000).toString();
@@ -43,6 +53,10 @@ class Main extends Component {
       donationText: "Thank you!",
       queryString: link
     })
+  }
+
+  hackingStart1() {
+    this.setState({strategy: 1,});
   }
 
 
@@ -78,14 +92,23 @@ class Main extends Component {
                       <Segment vertical>socialmedia.com</Segment>
                     </Grid.Column>
 
-                    <Grid.Column width={4.67}>
-                      <Person title={"Person 1"} description={"Remembers all their passwords"} />
+                    <Grid.Column width={4}>
+                      <Person 
+                        title={"Person 1"} 
+                        description={"Remembers all their passwords"} 
+                        strategy={this.state.strategy}/>
                     </Grid.Column>
-                    <Grid.Column width={4.67}>
-                      <Person title={"Person 2"} description={"Uses common passwords"} />
+                    <Grid.Column width={4}>
+                      <Person 
+                        title={"Person 2"} 
+                        description={"Uses common passwords"} 
+                        strategy={this.state.strategy}/>
                     </Grid.Column>
-                    <Grid.Column width={4.67}>
-                      <Person title={"Person 3"} description={"Uses a password manager for passwords"} />
+                    <Grid.Column width={4}>
+                      <Person 
+                        title={"Person 3"} 
+                        description={"Uses a password manager for passwords"}
+                        strategy={this.state.strategy}/>
                     </Grid.Column>
                   </Grid.Row>
 
@@ -94,9 +117,15 @@ class Main extends Component {
                     <Grid.Column width={2}>
                     </Grid.Column>
                     <Grid.Column width={5} className={styles.hacker}>
-                      <Segment vertical>Hacking option 1</Segment>
-                      <Segment vertical>Hacking option 2</Segment>
-                      <Segment vertical>Hacking option 3</Segment>
+                      <Segment vertical>Brute force through service website 
+                        <Button className={"ui button"} onClick={this.hackingStart1}>Start</Button> 
+                      </Segment>
+                      <Segment vertical>Crack password obtained from leaked encrypted database 
+                        <Button className={"ui button"}>Start</Button>
+                      </Segment>
+                      <Segment vertical>Deploy phishing website and emails 
+                        <Button className={"ui button"}>Start</Button>
+                      </Segment>
                     </Grid.Column>
 
                     <Grid.Column width={7}>

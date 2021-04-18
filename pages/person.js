@@ -15,6 +15,28 @@ class Password extends Component {
         super(props);
     }
 
+    /* plays the progress animation, finishes within {time} ms 
+        time by strategy:
+            1: 200 seconds 
+            2. 50 second
+            3: 1 second
+        */
+    playProgress(time) {
+        var progressInterval = setInterval(()=>{
+            this.setState({percent: this.state.percent+1})
+            if (this.state.percent == 100)
+                clearInterval(progressInterval)
+        }, time/100)
+    }
+
+    componentDidUpdate(prevProp, prevState) {
+        if (prevProp.strategy != this.props.strategy){
+            if (this.props.strategy == 1){
+                this.playProgress(10000)
+            }
+        }
+    }
+
     render() {
         return (
             <Segment>
@@ -39,15 +61,21 @@ export default class Person extends Component {
         this.props.onChange(this.props.qId, !this.props.checked);
     }
 
+
+
+
     render() {
         return (
             <div className={styles.card}>
                 <h3>{this.props.title}</h3>
                 <p>{this.props.description}</p>
                 <br />
-                <Password plaintext={"*****"} account={"bank.com"} />
-                <Password plaintext={"*****"} account={"academic.edu"} />
-                <Password plaintext={"*****"} account={"socialmedia.com"} />
+                <Password plaintext={"*****"} account={"bank.com"} 
+                    strategy={this.props.strategy}/>
+                <Password plaintext={"*****"} account={"academic.edu"} 
+                    strategy={this.props.strategy}/>
+                <Password plaintext={"*****"} account={"socialmedia.com"} 
+                    strategy={this.props.strategy}/>
             </div>
         )
 
