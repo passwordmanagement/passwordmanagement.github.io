@@ -17,15 +17,15 @@ class Main extends Component {
         changed when hovering above hacker panel */
       instructionDisplayed: null,
 
-      /* Hacking strategies:
+      /* Hacking strategies hardness (the larger the harder):
 
-        0 for original state
-        1 for service brute force
-        2 for password cracking
-        3 for social engineering
+        0 for original state, no hardness
+        service brute force: hardness=50000
+        password cracking, hardness=4000
+        social engineering: hardness=1000
       
         Changed when user click on start in the hacker panel */
-      strategy: 0,
+      strategyHardness: 0,
     }
 
     this.handleStart = this.handleStart.bind(this);
@@ -80,10 +80,11 @@ class Main extends Component {
     })
   }
 
-  hackingReset() {this.setState({strategy: 0})}
-  hackingStart1() {this.setState({strategy: 1})}
-  hackingStart2() {this.setState({strategy: 2})}
-  hackingStart3() {this.setState({strategy: 3})}
+  /* TODO: hate it here. how can we do better? */
+  hackingReset() {this.setState({strategyHardness: 0})}
+  hackingStart1() {this.setState({strategyHardness: 50000})}
+  hackingStart2() {this.setState({strategyHardness: 4000})}
+  hackingStart3() {this.setState({strategyHardness: 1})}
 
 
   render() {
@@ -123,21 +124,21 @@ class Main extends Component {
                         title={"Person 1"} 
                         pwds={this.userPasswords[0]}
                         description={"Uses common passwords"} 
-                        strategy={this.state.strategy}/>
+                        strategyHardness={this.state.strategyHardness}/>
                     </Grid.Column>
                     <Grid.Column width={4}>
                       <Person 
                         title={"Person 2"} 
                         pwds={this.userPasswords[1]}
                         description={"Remembers all their passwords"} 
-                        strategy={this.state.strategy}/>
+                        strategyHardness={this.state.strategyHardness}/>
                     </Grid.Column>
                     <Grid.Column width={4}>
                       <Person 
                         title={"Person 3"} 
                         pwds={this.userPasswords[2]}
                         description={"Uses a password manager for passwords"}
-                        strategy={this.state.strategy}/>
+                        strategyHardness={this.state.strategyHardness}/>
                     </Grid.Column>
                   </Grid.Row>
 
