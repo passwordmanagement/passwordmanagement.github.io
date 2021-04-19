@@ -136,3 +136,10 @@
   border: #00B4D8;
   border-style: solid;
 }
+
+.hacker div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
