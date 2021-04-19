@@ -113,6 +113,7 @@ class Password extends Component {
             pwdtext: "********",
             progressIntervalID: 0,
             randPwdIntervalID: 0,
+            timeNeeded: "Unknown"
         })
     }
 
