@@ -30,8 +30,33 @@ class Main extends Component {
 
     this.handleStart = this.handleStart.bind(this);
     this.handleEnd = this.handleEnd.bind(this);
+
+    this.hackingReset = this.hackingReset.bind(this);
     this.hackingStart1 = this.hackingStart1.bind(this);
+    this.hackingStart2 = this.hackingStart2.bind(this);
+    this.hackingStart3 = this.hackingStart3.bind(this);
     // this.handleChange = this.handleChange.bind(this);  // checkboxes
+
+    /* A list of user, their password and the passwords hardness (used later 
+    in password cracking progress bar */
+  this.userPasswords = [
+    [
+      {plaintext: "password_123", hardness: 5}, 
+      {plaintext: "1234567890", hardness: 1},
+      {plaintext: "qwerty", hardness: 1},
+    ],
+    [
+      {plaintext: "Bouncy_Jim@1998", hardness: 10}, 
+      {plaintext: "Bouncy_Jim98", hardness: 10},
+      {plaintext: "bouncyjim420", hardness: 10},
+    ],
+    [
+      {plaintext: "ghah@YIRK_zout8gnic", hardness: 100}, 
+      {plaintext: "saud0tong@NOOG!cluf", hardness: 100},
+      {plaintext: "jern6wouf-fow2TWEP", hardness: 100},
+    ],
+  ]
+
   }
 
   handleStart() {
@@ -55,9 +80,10 @@ class Main extends Component {
     })
   }
 
-  hackingStart1() {
-    this.setState({strategy: 1,});
-  }
+  hackingReset() {this.setState({strategy: 0})}
+  hackingStart1() {this.setState({strategy: 1})}
+  hackingStart2() {this.setState({strategy: 2})}
+  hackingStart3() {this.setState({strategy: 3})}
 
 
   render() {
@@ -95,18 +121,21 @@ class Main extends Component {
                     <Grid.Column width={4}>
                       <Person 
                         title={"Person 1"} 
-                        description={"Remembers all their passwords"} 
-                        strategy={this.state.strategy}/>
-                    </Grid.Column>
-                    <Grid.Column width={4}>
-                      <Person 
-                        title={"Person 2"} 
+                        pwds={this.userPasswords[0]}
                         description={"Uses common passwords"} 
                         strategy={this.state.strategy}/>
                     </Grid.Column>
                     <Grid.Column width={4}>
                       <Person 
+                        title={"Person 2"} 
+                        pwds={this.userPasswords[1]}
+                        description={"Remembers all their passwords"} 
+                        strategy={this.state.strategy}/>
+                    </Grid.Column>
+                    <Grid.Column width={4}>
+                      <Person 
                         title={"Person 3"} 
+                        pwds={this.userPasswords[2]}
                         description={"Uses a password manager for passwords"}
                         strategy={this.state.strategy}/>
                     </Grid.Column>
@@ -121,10 +150,13 @@ class Main extends Component {
                         <Button className={"ui button"} onClick={this.hackingStart1}>Start</Button> 
                       </Segment>
                       <Segment vertical>Crack password obtained from leaked encrypted database 
-                        <Button className={"ui button"}>Start</Button>
+                        <Button className={"ui button"} onClick={this.hackingStart2}>Start</Button>
                       </Segment>
                       <Segment vertical>Deploy phishing website and emails 
-                        <Button className={"ui button"}>Start</Button>
+                        <Button className={"ui button"} onClick={this.hackingStart3}>Start</Button>
+                      </Segment>
+                      <Segment vertical> Stop or reset hacking progress
+                        <Button className={"ui button"} onClick={this.hackingReset}>Reset</Button>
                       </Segment>
                     </Grid.Column>
 
