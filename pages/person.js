@@ -25,13 +25,13 @@ class Password extends Component {
     /* Set the "Time Needed" text under progress bar */
     setTimeNeeded(time){
         if (time < 10000)
-            this.setState({timeNeeded: "under a minute"})
+            this.setState({timeNeeded: "less than a minute"})
+        else if (time < 50000)
+            this.setState({timeNeeded: "less than an hour"})
         else if (time < 100000)
-            this.setState({timeNeeded: "a few minutes"})
-        else if (time < 500000)
-            this.setState({timeNeeded: "some hours"})
+            this.setState({timeNeeded: "less than a day"})
         else 
-            this.setState({timeNeeded: "impossible to crack"})
+            this.setState({timeNeeded: "several days"})
     }
 
 
@@ -77,14 +77,20 @@ class Password extends Component {
 
 
     /* plays the progress animation, time varies by hardness.
-        Total time needed (in ms) to complete progress bar is 
+        Total time needed (in ms) to complete progress bar is:
                 strategyHardness * pwdHardness * rand
+        
+        If hacking strategy 2 is chosen, add the similarity multiplier
+
         pwdHardness is pre-defined in index.js
         rand is used to simulate the random process of hacking
     */
-    animateHacking(strategyHardness, pwdHardness) {
-        var rand = 0.7 + Math.random()*0.6;
+    animateHacking(strategyHardness, pwdHardness, similarity) {
+        var rand = 0.8 + Math.random()*0.4;
         var time = strategyHardness * pwdHardness * rand;
+
+        if (strategyHardness==20000)
+            time = time * (1-similarity);
 
         this.setTimeNeeded(time);
 
@@ -92,6 +98,7 @@ class Password extends Component {
         if (time > 500000) {
             return;
         } else {
+            // start both the progress bar animation and the text animation
             this.setState({
                 running: true,
                 progressIntervalID: this.animateProgress(time),
@@ -124,7 +131,8 @@ class Password extends Component {
             if (this.props.strategyHardness != 0){
                 this.animateHacking(
                     this.props.strategyHardness, 
-                    this.props.pwd.hardness);
+                    this.props.pwd.hardness,
+                    this.props.pwd.similarity);
             } else {
                 this.resetProgress();
             }

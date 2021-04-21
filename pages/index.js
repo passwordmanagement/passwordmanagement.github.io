@@ -37,19 +37,24 @@ class Main extends Component {
     in password cracking progress bar */
   userPasswords = [
     [
-      {plaintext: "password_123", hardness: 5}, 
-      {plaintext: "1234567890", hardness: 1},
-      {plaintext: "qwerty", hardness: 1},
+      {plaintext: "password_123", hardness: 0.5, similarity: 1}, 
+      {plaintext: "1234567890", hardness: 0.2, similarity: 0},
+      {plaintext: "qwerty", hardness: 0.2, similarity: 0},
     ],
     [
-      {plaintext: "Bouncy_Jim@1998", hardness: 10}, 
-      {plaintext: "Bouncy_Jim98", hardness: 10},
-      {plaintext: "bouncyjim420", hardness: 10},
+      {plaintext: "MAQdC3vjWdzkHV+1", hardness: 1000, similarity: 1},
+      {plaintext: "MAQdC3vjWdzkHV+1", hardness: 1000, similarity: 1},
+      {plaintext: "MAQdC3vjWdzkHV+1", hardness: 1000, similarity: 1},
     ],
     [
-      {plaintext: "ghah@YIRK_zout8gnic", hardness: 1000}, 
-      {plaintext: "saud0tong@NOOG!cluf", hardness: 1000},
-      {plaintext: "jern6wouf-fow2TWEP", hardness: 1000},
+      {plaintext: "Bouncy_Jim@1998", hardness: 10, similarity: 1}, 
+      {plaintext: "Bouncy_Jim98", hardness: 10, similarity: 0.9},
+      {plaintext: "bouncyjim420", hardness: 10, similarity: 0.9},
+    ],
+    [
+      {plaintext: "ghah@YIRK_zout8gnic", hardness: 1000, similarity: 1}, 
+      {plaintext: "saud0tong@NOOG!cluf", hardness: 1000, similarity: 0},
+      {plaintext: "jern6wouf-fow2TWEP", hardness: 1000, similarity: 0},
     ],
   ]
 
@@ -86,7 +91,7 @@ class Main extends Component {
   }
 
   hackingOption(strategy) {
-    const hardness = [0, 50000, 10000, 4000];
+    const hardness = [0, 60000, 20000, 5000];
     this.setState({strategyHardness: hardness[strategy]});
   }
 
@@ -139,9 +144,7 @@ class Main extends Component {
                   {/* People panels */}
                   <Grid.Row>
                     <Grid.Column width={2}>
-                      {/* <Segment vertical>Bank.com</Segment>
-                      <Segment vertical>Academic.edu</Segment>
-                      <Segment vertical>socialmedia.com</Segment> */}
+                      
                     </Grid.Column>
 
                     <Grid.Column width={3} className={styles.noShadow}>
@@ -168,7 +171,7 @@ class Main extends Component {
                     <Grid.Column width={3} className={styles.noShadow}>
                       <Person 
                         title={"Kim"} 
-                        pwds={this.userPasswords[2]}
+                        pwds={this.userPasswords[3]}
                         description={"Uses a password manager"}
                         strategyHardness={this.state.strategyHardness}/>
                     </Grid.Column>
