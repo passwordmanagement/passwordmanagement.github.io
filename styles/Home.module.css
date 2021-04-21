@@ -62,6 +62,7 @@
   line-height: 1.5;
   font-size: 1rem;
   margin: 1.5rem;
+  max-width: 1000px;
 }
 
 .code {
@@ -144,6 +145,10 @@
 
 .hackerOption:hover {
   background-color: #eaeaea !important;
+}
+
+.noShadow {
+  box-shadow: 0 0 0 0 !important;
 }
 
 

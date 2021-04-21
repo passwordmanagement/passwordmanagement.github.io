@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import React, { Component } from 'react'
 import styles from '../styles/Home.module.css'
-import { Button, Grid, Container, Segment, Header } from 'semantic-ui-react'
+import { Button, Grid, Container, Segment, Header, SegmentGroup } from 'semantic-ui-react'
 import Person from './person'
 
 class Main extends Component {
@@ -126,7 +126,7 @@ class Main extends Component {
           </h1>
 
           <p className={styles.description}>
-            Description of  project here
+          In this activity, you will be following four users with different password setups as they create new accounts on a website. One of the users has a password manager, which is a tool that generates random passwords and stores them encrypted behind a master password. The other users each have their own password and a different method for managing them across accounts. You will be able to observe the differences between their setup process, as well as simulate a password-cracking attempt against each of the users.
           </p>
 
           {this.state.start ?
@@ -144,30 +144,30 @@ class Main extends Component {
                       <Segment vertical>socialmedia.com</Segment> */}
                     </Grid.Column>
 
-                    <Grid.Column width={3}>
+                    <Grid.Column width={3} className={styles.noShadow}>
                       <Person 
-                        title={"Person 1"} 
+                        title={"Tim"} 
                         pwds={this.userPasswords[0]}
                         description={"Uses common passwords"} 
                         strategyHardness={this.state.strategyHardness}/>
                     </Grid.Column>
-                    <Grid.Column width={3}>
+                    <Grid.Column width={3} className={styles.noShadow}>
                       <Person 
-                        title={"Person 2"} 
+                        title={"Nim"} 
                         pwds={this.userPasswords[1]}
-                        description={"Remembers all their passwords"} 
+                        description={"Reuses their password"} 
                         strategyHardness={this.state.strategyHardness}/>
                     </Grid.Column>
-                    <Grid.Column width={3}>
+                    <Grid.Column width={3} className={styles.noShadow}>
                       <Person 
-                        title={"Person 3"} 
+                        title={"Jim"} 
                         pwds={this.userPasswords[2]}
-                        description={"Uses a password manager"}
+                        description={"Remembers all their passwords"}
                         strategyHardness={this.state.strategyHardness}/>
                     </Grid.Column>
-                    <Grid.Column width={3}>
+                    <Grid.Column width={3} className={styles.noShadow}>
                       <Person 
-                        title={"Person 4"} 
+                        title={"Kim"} 
                         pwds={this.userPasswords[2]}
                         description={"Uses a password manager"}
                         strategyHardness={this.state.strategyHardness}/>
@@ -179,7 +179,7 @@ class Main extends Component {
                     <Grid.Column width={2}>
                     </Grid.Column>
                     <Grid.Column width={5} className={styles.hacker}>
-                    <Segment vertical 
+                      <Segment vertical 
                         className={styles.hackerOption}
                         onMouseOver={()=>this.changeDescription(1)}
                         onClick={()=>this.hackingOption(1)}>
@@ -203,6 +203,7 @@ class Main extends Component {
                         onClick={()=>this.hackingOption(0)}>
                         Stop or reset hacking progress
                       </Segment>
+                    
                     </Grid.Column>
 
                     <Grid.Column width={7}>
@@ -213,7 +214,7 @@ class Main extends Component {
                       <p>{this.descriptions[this.state.descriptionID][1]}</p>
                     </Container>
                     </Grid.Column>
-                    <Grid.Column width={2}>
+                    <Grid.Column width={2} className={styles.noShadow}>
                     </Grid.Column>
 
                   </Grid.Row>
