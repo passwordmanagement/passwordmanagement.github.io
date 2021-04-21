@@ -149,13 +149,13 @@ class Main extends Component {
                       <Segment vertical padded className={styles.noBorder}></Segment>
                       <Segment vertical padded className={styles.noBorder}></Segment>
                       <Segment vertical padded="very" className={styles.noBorder}>
-                        <Header as="h4">Bank.com</Header>
+                        <Header as="h3">Bank.com</Header>
                         </Segment>
                       <Segment vertical padded="very" className={styles.noBorder}>
-                      <Header as="h4">Academic.edu</Header>
+                      <Header as="h3">School.edu</Header>
                       </Segment>
                       <Segment vertical padded="very" className={styles.noBorder}>
-                      <Header as="h4">FB.com</Header>
+                      <Header as="h3">FB.com</Header>
                       </Segment>
                     </Grid.Column>
 
@@ -217,7 +217,7 @@ class Main extends Component {
                         onClick={()=>this.hackingOption(3)}>
                         Run<strong><tt> modified_passwords.exe</tt></strong>
                       </Segment>
-                      <Segment vertical 
+                      <Segment vertical color=""
                         className={styles.hackerOption}
                         onMouseOver={()=>this.changeDescription(0)}
                         onClick={()=>this.hackingOption(0)}>

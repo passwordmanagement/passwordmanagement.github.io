@@ -128,13 +128,12 @@ class Password extends Component {
         play animation. */
     componentDidUpdate(prevProp) {
         if (prevProp.strategyHardness != this.props.strategyHardness){
+            this.resetProgress();
             if (this.props.strategyHardness != 0){
                 this.animateHacking(
                     this.props.strategyHardness, 
                     this.props.pwd.hardness,
                     this.props.pwd.similarity);
-            } else {
-                this.resetProgress();
             }
         }
     }
