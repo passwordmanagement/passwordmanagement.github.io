@@ -62,6 +62,7 @@
   line-height: 1.5;
   font-size: 1rem;
   margin: 1.5rem;
+  max-width: 1000px;
 }
 
 .code {
@@ -89,7 +90,7 @@
 }
 
 .card {
-  margin: 1rem;
+  margin: 1rem, 0;
   flex-basis: 45%;
   padding: 1rem;
   text-align: left;
@@ -132,14 +133,27 @@
 }
 
 .hacker {
-  padding: 1rem;
+  padding: 0 !important;
   border: #00B4D8;
   border-style: solid;
+  border-radius: 0.5em;
 }
 
-.hacker div {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.hackerOption {
+  padding: 1em !important;
 }
+
+.hackerOption:hover {
+  background-color: #eaeaea !important;
+}
+
+.noShadow {
+  box-shadow: 0 0 0 0 !important;
+}
+
+.noBorder {
+  border: 0 !important;
+}
+
+
 
