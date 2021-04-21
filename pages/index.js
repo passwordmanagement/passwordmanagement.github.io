@@ -72,10 +72,10 @@ class Main extends Component {
     ],[
       "previous_passwords.exe",
       `This tool allows you to test passwords that a particular user has used 
-      before, if they were also a user on <website2>, a site with a known data 
+      before, if they were also a user on Bank.com, a site with a known data 
       breach. This program takes about ten minutes to run to completion on your 
-      database, since half the users on <website> also had an account on 
-      <website2>.`
+      database, since half the users on the other two websites also had an 
+      account on Bank.com.`
     ],[
       "modified_passwords.exe",
       `This tool allows you to test passwords with added numbers and characters, 
@@ -91,7 +91,7 @@ class Main extends Component {
   }
 
   hackingOption(strategy) {
-    const hardness = [0, 60000, 20000, 5000];
+    const hardness = [0, 60000, 20000, 1000];
     this.setState({strategyHardness: hardness[strategy]});
   }
 
@@ -131,7 +131,7 @@ class Main extends Component {
           </h1>
 
           <p className={styles.description}>
-          In this activity, you will be following four users with different password setups as they create new accounts on a website. One of the users has a password manager, which is a tool that generates random passwords and stores them encrypted behind a master password. The other users each have their own password and a different method for managing them across accounts. You will be able to observe the differences between their setup process, as well as simulate a password-cracking attempt against each of the users.
+          As part of a security test, you’ve attained the encrypted password list for all users (for example, “password123” might correspond to a seemingly random mix of letters and numbers). You want to see how many passwords you can crack for a research project. To decrypt the password list, you have a series of tools at your disposal. While each tool has a projected runtime overall, you can see passwords that are cracked along the way as it runs.
           </p>
 
           {this.state.start ?
@@ -143,8 +143,20 @@ class Main extends Component {
 
                   {/* People panels */}
                   <Grid.Row>
-                    <Grid.Column width={2}>
-                      
+                    <Grid.Column width={1}>
+                    </Grid.Column>
+                    <Grid.Column width={1} className={styles.noShadow}>
+                      <Segment vertical padded className={styles.noBorder}></Segment>
+                      <Segment vertical padded className={styles.noBorder}></Segment>
+                      <Segment vertical padded="very" className={styles.noBorder}>
+                        <Header as="h4">Bank.com</Header>
+                        </Segment>
+                      <Segment vertical padded="very" className={styles.noBorder}>
+                      <Header as="h4">Academic.edu</Header>
+                      </Segment>
+                      <Segment vertical padded="very" className={styles.noBorder}>
+                      <Header as="h4">FB.com</Header>
+                      </Segment>
                     </Grid.Column>
 
                     <Grid.Column width={3} className={styles.noShadow}>
@@ -175,13 +187,18 @@ class Main extends Component {
                         description={"Uses a password manager"}
                         strategyHardness={this.state.strategyHardness}/>
                     </Grid.Column>
+                    <Grid.Column width={2} className={styles.noShadow}></Grid.Column>
                   </Grid.Row>
 
                   {/* Hacker panel */}
                   <Grid.Row>
-                    <Grid.Column width={2}>
+                    <Grid.Column width={2}></Grid.Column>
+                    <Grid.Column width={2} className={styles.noShadow}>
+                    
+                    <Header as="h3">Hacking Options</Header>
+                      <p>Click on one of the hacking tools on the right to start hacking. Each hacking tool targets one of a common password behavior.</p>
                     </Grid.Column>
-                    <Grid.Column width={5} className={styles.hacker}>
+                    <Grid.Column width={3} className={styles.hacker}>
                       <Segment vertical 
                         className={styles.hackerOption}
                         onMouseOver={()=>this.changeDescription(1)}
@@ -211,7 +228,7 @@ class Main extends Component {
 
                     <Grid.Column width={7}>
                     <Container text>
-                      <Header as='h2'>
+                      <Header as='h3'>
                         {this.descriptions[this.state.descriptionID][0]}
                       </Header>
                       <p>{this.descriptions[this.state.descriptionID][1]}</p>

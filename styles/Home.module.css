@@ -90,7 +90,7 @@
 }
 
 .card {
-  margin: 1rem;
+  margin: 1rem, 0;
   flex-basis: 45%;
   padding: 1rem;
   text-align: left;
@@ -150,5 +150,10 @@
 .noShadow {
   box-shadow: 0 0 0 0 !important;
 }
+
+.noBorder {
+  border: 0 !important;
+}
+
 
 
