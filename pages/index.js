@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import React, { Component } from 'react'
 import styles from '../styles/Home.module.css'
-import { Button, Grid, Container, Segment } from 'semantic-ui-react'
+import { Button, Grid, Container, Segment, Header } from 'semantic-ui-react'
 import Person from './person'
 
 class Main extends Component {
@@ -17,29 +17,25 @@ class Main extends Component {
         changed when hovering above hacker panel */
       instructionDisplayed: null,
 
-      /* Hacking strategies hardness (the larger the harder):
-
-        0 for original state, no hardness
-        service brute force: hardness=50000
-        password cracking, hardness=4000
-        social engineering: hardness=1000
-      
+      /* Hacking strategies hardness (the larger the harder)      
         Changed when user click on start in the hacker panel */
       strategyHardness: 0,
+
+      /* Load description for hacking strategy
+        Changed when user hover above any of the hacker options */
+      descriptionID: 0,
     }
 
     this.handleStart = this.handleStart.bind(this);
     this.handleEnd = this.handleEnd.bind(this);
 
-    this.hackingReset = this.hackingReset.bind(this);
-    this.hackingStart1 = this.hackingStart1.bind(this);
-    this.hackingStart2 = this.hackingStart2.bind(this);
-    this.hackingStart3 = this.hackingStart3.bind(this);
-    // this.handleChange = this.handleChange.bind(this);  // checkboxes
+    this.hackingOption = this.hackingOption.bind(this); 
+    this.changeDescription = this.changeDescription.bind(this);
+  }
 
-    /* A list of user, their password and the passwords hardness (used later 
+  /* A list of user, their password and the passwords hardness (used later 
     in password cracking progress bar */
-  this.userPasswords = [
+  userPasswords = [
     [
       {plaintext: "password_123", hardness: 5}, 
       {plaintext: "1234567890", hardness: 1},
@@ -51,12 +47,47 @@ class Main extends Component {
       {plaintext: "bouncyjim420", hardness: 10},
     ],
     [
-      {plaintext: "ghah@YIRK_zout8gnic", hardness: 100}, 
-      {plaintext: "saud0tong@NOOG!cluf", hardness: 100},
-      {plaintext: "jern6wouf-fow2TWEP", hardness: 100},
+      {plaintext: "ghah@YIRK_zout8gnic", hardness: 1000}, 
+      {plaintext: "saud0tong@NOOG!cluf", hardness: 1000},
+      {plaintext: "jern6wouf-fow2TWEP", hardness: 1000},
     ],
   ]
 
+  /* List of descriptions of hacking options */
+  descriptions = [
+    [
+      "Description",
+      `Hover above a hacking option for description`
+    ],[
+      "common_passwords.exe",
+      `This tool allows you to test common passwords and compare the encrypted 
+      versions of these passwords to the ones on the list. Any matches show that 
+      the user has used this password. This program takes about an hour to run 
+      to completion on your database.`
+    ],[
+      "previous_passwords.exe",
+      `This tool allows you to test passwords that a particular user has used 
+      before, if they were also a user on <website2>, a site with a known data 
+      breach. This program takes about ten minutes to run to completion on your 
+      database, since half the users on <website> also had an account on 
+      <website2>.`
+    ],[
+      "modified_passwords.exe",
+      `This tool allows you to test passwords with added numbers and characters, 
+      such as “Password1!”, as well as building on combinations of the previous 
+      tools. This program takes a couple days to run to completion on your 
+      database, since there are many different ways this can change the test 
+      passwords.`
+    ]
+  ]
+
+  changeDescription(id) {
+    this.setState({descriptionID: id});
+  }
+
+  hackingOption(strategy) {
+    const hardness = [0, 50000, 10000, 4000];
+    this.setState({strategyHardness: hardness[strategy]});
   }
 
   handleStart() {
@@ -68,7 +99,6 @@ class Main extends Component {
 
   handleEnd() {
     // Create Qualtrics Query String
-    // What does this do?
     var link = "https://uchicago.co1.qualtrics.com/jfe/form/SV_dgV556kBNVvZVmC?";
 
     link += "&TimeSpent=" + ((Date.now() - this.state.startTime) / 1000).toString();
@@ -80,11 +110,6 @@ class Main extends Component {
     })
   }
 
-  /* TODO: hate it here. how can we do better? */
-  hackingReset() {this.setState({strategyHardness: 0})}
-  hackingStart1() {this.setState({strategyHardness: 50000})}
-  hackingStart2() {this.setState({strategyHardness: 4000})}
-  hackingStart3() {this.setState({strategyHardness: 1})}
 
 
   render() {
@@ -114,30 +139,37 @@ class Main extends Component {
                   {/* People panels */}
                   <Grid.Row>
                     <Grid.Column width={2}>
-                      <Segment vertical>Bank.com</Segment>
+                      {/* <Segment vertical>Bank.com</Segment>
                       <Segment vertical>Academic.edu</Segment>
-                      <Segment vertical>socialmedia.com</Segment>
+                      <Segment vertical>socialmedia.com</Segment> */}
                     </Grid.Column>
 
-                    <Grid.Column width={4}>
+                    <Grid.Column width={3}>
                       <Person 
                         title={"Person 1"} 
                         pwds={this.userPasswords[0]}
                         description={"Uses common passwords"} 
                         strategyHardness={this.state.strategyHardness}/>
                     </Grid.Column>
-                    <Grid.Column width={4}>
+                    <Grid.Column width={3}>
                       <Person 
                         title={"Person 2"} 
                         pwds={this.userPasswords[1]}
                         description={"Remembers all their passwords"} 
                         strategyHardness={this.state.strategyHardness}/>
                     </Grid.Column>
-                    <Grid.Column width={4}>
+                    <Grid.Column width={3}>
                       <Person 
                         title={"Person 3"} 
                         pwds={this.userPasswords[2]}
-                        description={"Uses a password manager for passwords"}
+                        description={"Uses a password manager"}
+                        strategyHardness={this.state.strategyHardness}/>
+                    </Grid.Column>
+                    <Grid.Column width={3}>
+                      <Person 
+                        title={"Person 4"} 
+                        pwds={this.userPasswords[2]}
+                        description={"Uses a password manager"}
                         strategyHardness={this.state.strategyHardness}/>
                     </Grid.Column>
                   </Grid.Row>
@@ -147,24 +179,39 @@ class Main extends Component {
                     <Grid.Column width={2}>
                     </Grid.Column>
                     <Grid.Column width={5} className={styles.hacker}>
-                      <Segment vertical>Brute force through service website 
-                        <Button className={"ui button"} onClick={this.hackingStart1}>Start</Button> 
+                    <Segment vertical 
+                        className={styles.hackerOption}
+                        onMouseOver={()=>this.changeDescription(1)}
+                        onClick={()=>this.hackingOption(1)}>
+                        Run<strong><tt> common_passwords.exe</tt></strong>
                       </Segment>
-                      <Segment vertical>Crack password obtained from leaked encrypted database 
-                        <Button className={"ui button"} onClick={this.hackingStart2}>Start</Button>
+                      <Segment vertical 
+                        className={styles.hackerOption}
+                        onMouseOver={()=>this.changeDescription(2)}
+                        onClick={()=>this.hackingOption(2)}>
+                        Run<strong><tt> previous_passwords.exe</tt></strong>
                       </Segment>
-                      <Segment vertical>Deploy phishing website and emails 
-                        <Button className={"ui button"} onClick={this.hackingStart3}>Start</Button>
+                      <Segment vertical 
+                        className={styles.hackerOption}
+                        onMouseOver={()=>this.changeDescription(3)}
+                        onClick={()=>this.hackingOption(3)}>
+                        Run<strong><tt> modified_passwords.exe</tt></strong>
                       </Segment>
-                      <Segment vertical> Stop or reset hacking progress
-                        <Button className={"ui button"} onClick={this.hackingReset}>Reset</Button>
+                      <Segment vertical 
+                        className={styles.hackerOption}
+                        onMouseOver={()=>this.changeDescription(0)}
+                        onClick={()=>this.hackingOption(0)}>
+                        Stop or reset hacking progress
                       </Segment>
                     </Grid.Column>
 
                     <Grid.Column width={7}>
-                      <p className={styles.description}>
-                        Description of instructions
-                      </p>
+                    <Container text>
+                      <Header as='h2'>
+                        {this.descriptions[this.state.descriptionID][0]}
+                      </Header>
+                      <p>{this.descriptions[this.state.descriptionID][1]}</p>
+                    </Container>
                     </Grid.Column>
                     <Grid.Column width={2}>
                     </Grid.Column>

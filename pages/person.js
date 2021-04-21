@@ -139,7 +139,7 @@ class Password extends Component {
                     percent={this.state.percent} 
                     indicating={this.state.running}
                     autoSuccess>
-                Time Needed: {this.state.timeNeeded}
+                {this.state.timeNeeded}
                 </Progress>
             </Segment>
                 

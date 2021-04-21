@@ -132,14 +132,18 @@
 }
 
 .hacker {
-  padding: 1rem;
+  padding: 0 !important;
   border: #00B4D8;
   border-style: solid;
+  border-radius: 0.5em;
 }
 
-.hacker div {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.hackerOption {
+  padding: 1em !important;
 }
+
+.hackerOption:hover {
+  background-color: #eaeaea !important;
+}
+
 
