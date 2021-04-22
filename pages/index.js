@@ -214,7 +214,7 @@ class Main extends Component {
                     
                     <Header as="h3">Hacking Options</Header>
                       <p>Click on one of the hacking tools on the right to start hacking. 
-                        Each hacking tool targets one of a common password behavior.
+                        Each hacking tool is a method real world hackers would use to target a common password behavior.
                         You must try all three hacking tools before taking the completion survey.</p>
                     </Grid.Column>
                     <Grid.Column width={3} className={styles.hacker}>
