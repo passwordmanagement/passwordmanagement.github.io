@@ -155,5 +155,16 @@
   border: 0 !important;
 }
 
+.summary {
+  min-width: 70vw;
+  min-height: 50vh;
+  left: 15vw;
+  top: 25vh;
+  background-color: rgba(177, 177, 177, 0.95);
+  padding: 3rem;
+  margin: auto;
+  position: absolute;
+}
+
 
 

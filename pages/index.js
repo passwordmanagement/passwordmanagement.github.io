@@ -13,6 +13,7 @@ class Main extends Component {
       startTime: 0,
       endTime: 0,
       disabledButton: true,
+      showSummary: false,
 
       /* State for currently displayed instruction
         changed when hovering above hacker panel */
@@ -68,7 +69,7 @@ class Main extends Component {
     [
       "Description",
       `Hover above a hacking option for description. Once you have tested all the options,
-      you can take the completion survey below.`
+      you can click "Done!" to take the completion survery.`
     ],[
       "common_passwords.exe",
       `This tool allows you to test common passwords and compare the encrypted 
@@ -106,7 +107,8 @@ class Main extends Component {
     if (this.state.allowRevealAllPasswords*strategy%6==0){
       this.setState({strategyHardness: hardness[strategy], 
         allowRevealAllPasswords: this.state.allowRevealAllPasswords*strategy,
-        disabledButton: false});
+        disabledButton: false
+      });
     } else {
       this.setState({strategyHardness: hardness[strategy], allowRevealAllPasswords: this.state.allowRevealAllPasswords*strategy});
     }
@@ -127,11 +129,10 @@ class Main extends Component {
     this.setState({
       endTime: Date.now(),
       disabledButton: false,
-      donationText: "Thank you!",
-      queryString: link
+      queryString: link,
+      showSummary: true
     })
   }
-
 
 
   render() {
@@ -210,11 +211,13 @@ class Main extends Component {
                   {/* Hacker panel */}
                   <Grid.Row>
                     <Grid.Column width={2}></Grid.Column>
-                    <Grid.Column width={2} className={styles.noShadow}>
+                    <Grid.Column width={3} className={styles.noShadow}>
                     
                     <Header as="h3">Hacking Options</Header>
                       <p>Click on one of the hacking tools on the right to start hacking. 
+                      <br/>
                         Each hacking tool is a method real world hackers would use to target a common password behavior.
+                        <br/><br/>
                         You must try all three hacking tools before taking the completion survey.</p>
                     </Grid.Column>
                     <Grid.Column width={3} className={styles.hacker}>
@@ -254,27 +257,61 @@ class Main extends Component {
                     
                     </Grid.Column>
                     
-                    <Grid.Column width={7}>
-                    <Container text>
+                    <Grid.Column width={6}>
+                    <div text>
                       <Header as='h3'>
                         {this.descriptions[this.state.descriptionID][0]}
                       </Header>
                       <p>{this.descriptions[this.state.descriptionID][1]}</p>
                       
+                    </div>
+                    <br/><br/><br/><br/>
+                    { this.state.showSummary ? 
+                      <Container text className={styles.summary}>
+                      <Header as='h2'>Summary of activity</Header>
+                      <p>
+                      In this activity, you saw the differences in password management techniques on a website with a security breach. These techniques had varying degrees of success in memorability, security, and efficiency during the login process.
+                        </p>
+                        <p>
+                        Key Points:
+                        <ul>
+                          <li>Common passwords are easy to remember and quick to use, but they are easily cracked in the event of a data breach.</li>
+                          <li>If a single password is used for multiple accounts, these accounts are at risk if one is compromised.</li>
+                          <li>A password manager can provide good security at the cost of efficiency.</li>
+                        </ul>
+                      </p>
+                      <p>
+                      <Header as='h3'>Password Tips</Header>
+                        <ul>
+                          <li>A password manager can help you create and use hard-to-crack passwords.</li>
+                          <li>Try not to use any real words--abbreviating a phrase is better.</li>
+                          <li>Use special characters, randomly-cased letters, and numbers; these are most commonly placed at the beginning or end, so try putting them in the middle of the password.</li>
+                          <li>Use different passwords for different accounts, and try not to make these formulaic (for example, don’t use the site name plus the same number or special character in the same order every time).</li>
+                          <li>Avoid using personal information in your passwords.</li>
+                        </ul>
+                      </p>
+                      <br/>
+                      {/* Submit button to go to custom Qualtrics survey link for the post-survey */}
+                          <a href={this.state.queryString} target="_blank">
+                                <Button disabled={this.state.disabledButton} color='orange' floated='right' onClick={this.handleEnd} >
+                                  Take Survey!
+                                </Button>
+                              </a>
                     </Container>
-                    {/* Submit button to go to custom Qualtrics survey link for the post-survey */}
-                    <a href={this.state.queryString} target="_blank">
-                          <Button disabled={this.state.disabledButton} color='orange' floated='right' onClick={this.handleEnd} >
-                            Take Survey!
-                          </Button>
-                        </a>
+                    :
+                    <Button disabled={this.state.disabledButton} color='orange' floated='right' onClick={this.handleEnd} >
+                      Done!
+                    </Button>
+                    }
                     </Grid.Column>
-                    <Grid.Column width={2} className={styles.noShadow}>
+                    <Grid.Column width={1} className={styles.noShadow}>
                     </Grid.Column>
 
                   </Grid.Row>
 
                 </Grid>
+                
+                
 
                 {/* All of project goes here */}
               </div>
