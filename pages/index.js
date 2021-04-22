@@ -4,6 +4,7 @@ import styles from '../styles/Home.module.css'
 import { Button, Grid, Container, Segment, Header, SegmentGroup } from 'semantic-ui-react'
 import Person from './person'
 
+
 class Main extends Component {
   constructor(props) {
     super(props);
@@ -27,7 +28,7 @@ class Main extends Component {
 
       /* State for allowing all passwords to be revealed
         after all hacker options are tested */
-      allowRevealAllPasswords: 1
+      allowRevealAllPasswords: 1,
     }
 
     this.handleStart = this.handleStart.bind(this);

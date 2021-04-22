@@ -9,17 +9,18 @@ import { Button, Checkbox, Progress, Segment } from 'semantic-ui-react'
  * (if we wanted to do any animations for breaking passwords)
  */
 class Password extends Component {
-    state = { 
-        percent: 0 ,
-        running: false,
-        pwdtext: "********",
-        progressIntervalID: 0,
-        randPwdIntervalID: 0,
-        timeNeeded: "Unknown",
-    }
-
+    
     constructor(props) {
         super(props);
+        this.state = { 
+            percent: 0,
+            running: false,
+            pwdtext: "********",
+            progressIntervalID: 0,
+            randPwdIntervalID: 0,
+            timeNeeded: "Unknown",
+        }
+    
     }
 
     /* Set the "Time Needed" text under progress bar */
@@ -171,12 +172,25 @@ export default class Person extends Component {
                 <h3>{this.props.title}</h3>
                 <p>{this.props.description}</p>
                 <br />
+
+                {/* Need to first ensure props is loaded, otherwise we get a prerender-error during the build */}
+                { this.props.pwds ? 
+                
+                <div>
                 <Password pwd={this.props.pwds[0]} account={"bank.com"} 
                     strategyHardness={this.props.strategyHardness}/>
                 <Password pwd={this.props.pwds[1]} account={"academic.edu"} 
                     strategyHardness={this.props.strategyHardness}/>
                 <Password pwd={this.props.pwds[2]} account={"socialmedia.com"} 
                     strategyHardness={this.props.strategyHardness}/>
+                </div>
+
+                :
+                <div>
+                </div>
+            
+                }
+                
             </div>
         )
 
