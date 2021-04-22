@@ -258,14 +258,12 @@ class Main extends Component {
                     </Grid.Column>
                     
                     <Grid.Column width={6}>
-                    <div text>
+                    <div>
                       <Header as='h3'>
                         {this.descriptions[this.state.descriptionID][0]}
                       </Header>
                       <p>{this.descriptions[this.state.descriptionID][1]}</p>
-                      
-                    </div>
-                    <br/><br/><br/><br/>
+                      <br/><br/><br/><br/>
                     { this.state.showSummary ? 
                       <Container text className={styles.summary}>
                       <Header as='h2'>Summary of activity</Header>
@@ -303,6 +301,8 @@ class Main extends Component {
                       Done!
                     </Button>
                     }
+                    </div>
+                   
                     </Grid.Column>
                     <Grid.Column width={1} className={styles.noShadow}>
                     </Grid.Column>
