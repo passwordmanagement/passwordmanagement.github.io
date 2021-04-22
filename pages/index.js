@@ -120,7 +120,7 @@ class Main extends Component {
 
   handleEnd() {
     // Create Qualtrics Query String
-    var link = "https://uchicago.co1.qualtrics.com/jfe/form/SV_dgV556kBNVvZVmC?";
+    var link = "https://qfreeaccountssjc1.az1.qualtrics.com/jfe/form/SV_9KzPYE8PJ1xjtLo?";
 
     link += "&TimeSpent=" + ((Date.now() - this.state.startTime) / 1000).toString();
     this.setState({
@@ -214,7 +214,7 @@ class Main extends Component {
                     <Header as="h3">Hacking Options</Header>
                       <p>Click on one of the hacking tools on the right to start hacking. 
                         Each hacking tool targets one of a common password behavior.
-                        You must try all three hacking tools before taking the completion survey</p>
+                        You must try all three hacking tools before taking the completion survey.</p>
                     </Grid.Column>
                     <Grid.Column width={3} className={styles.hacker}>
                       <Segment vertical 
