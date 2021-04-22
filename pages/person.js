@@ -63,7 +63,7 @@ class Password extends Component {
                 pwdtext: Math.random().toString(36).substring(2),
             })
             // when hacking is done, stop the interval callback
-            if (this.state.percent == 100){
+            if (this.state.percent == 100 || this.props.strategyHardness==-1){
                 clearInterval(randPwdInterval)
                 this.setState({
                     randPwdIntervalID: 0,

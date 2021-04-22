@@ -24,6 +24,10 @@ class Main extends Component {
       /* Load description for hacking strategy
         Changed when user hover above any of the hacker options */
       descriptionID: 0,
+
+      /* State for allowing all passwords to be revealed
+        after all hacker options are tested */
+      allowRevealAllPasswords: 1
     }
 
     this.handleStart = this.handleStart.bind(this);
@@ -62,7 +66,8 @@ class Main extends Component {
   descriptions = [
     [
       "Description",
-      `Hover above a hacking option for description`
+      `Hover above a hacking option for description. Once you have tested all the options,
+      you can take the completion survey below.`
     ],[
       "common_passwords.exe",
       `This tool allows you to test common passwords and compare the encrypted 
@@ -83,6 +88,10 @@ class Main extends Component {
       tools. This program takes a couple days to run to completion on your 
       database, since there are many different ways this can change the test 
       passwords.`
+    ],[
+      "Reveal all passwords",
+      `Not a hacking tool, but use this to reveal all the passwords at the end of
+      the activity to see how each person's password making habits differ.`
     ]
   ]
 
@@ -92,7 +101,14 @@ class Main extends Component {
 
   hackingOption(strategy) {
     const hardness = [0, 60000, 20000, 1000];
-    this.setState({strategyHardness: hardness[strategy]});
+
+    if (this.state.allowRevealAllPasswords*strategy%6==0){
+      this.setState({strategyHardness: hardness[strategy], 
+        allowRevealAllPasswords: this.state.allowRevealAllPasswords*strategy,
+        disabledButton: false});
+    } else {
+      this.setState({strategyHardness: hardness[strategy], allowRevealAllPasswords: this.state.allowRevealAllPasswords*strategy});
+    }
   }
 
   handleStart() {
@@ -196,7 +212,9 @@ class Main extends Component {
                     <Grid.Column width={2} className={styles.noShadow}>
                     
                     <Header as="h3">Hacking Options</Header>
-                      <p>Click on one of the hacking tools on the right to start hacking. Each hacking tool targets one of a common password behavior.</p>
+                      <p>Click on one of the hacking tools on the right to start hacking. 
+                        Each hacking tool targets one of a common password behavior.
+                        You must try all three hacking tools before taking the completion survey</p>
                     </Grid.Column>
                     <Grid.Column width={3} className={styles.hacker}>
                       <Segment vertical 
@@ -217,22 +235,38 @@ class Main extends Component {
                         onClick={()=>this.hackingOption(3)}>
                         Run<strong><tt> modified_passwords.exe</tt></strong>
                       </Segment>
-                      <Segment vertical color=""
-                        className={styles.hackerOption}
-                        onMouseOver={()=>this.changeDescription(0)}
-                        onClick={()=>this.hackingOption(0)}>
-                        Stop or reset hacking progress
-                      </Segment>
+                      
+                      <Segment.Group horizontal>
+                        <Segment vertical 
+                          className={styles.hackerOption}
+                          onMouseOver={()=>this.changeDescription(0)}
+                          onClick={()=>this.hackingOption(0)}>
+                          Stop or reset hacking progress
+                        </Segment>
+                        <Segment vertical
+                          className={styles.hackerOption}
+                          onMouseOver={()=>this.changeDescription(4)}
+                          onClick={()=>this.hackingOption(-1)}>
+                          Reveal all passwords
+                        </Segment>
+                      </Segment.Group>
                     
                     </Grid.Column>
-
+                    
                     <Grid.Column width={7}>
                     <Container text>
                       <Header as='h3'>
                         {this.descriptions[this.state.descriptionID][0]}
                       </Header>
                       <p>{this.descriptions[this.state.descriptionID][1]}</p>
+                      
                     </Container>
+                    {/* Submit button to go to custom Qualtrics survey link for the post-survey */}
+                    <a href={this.state.queryString} target="_blank">
+                          <Button disabled={this.state.disabledButton} color='orange' floated='right' onClick={this.handleEnd} >
+                            Take Survey!
+                          </Button>
+                        </a>
                     </Grid.Column>
                     <Grid.Column width={2} className={styles.noShadow}>
                     </Grid.Column>
@@ -244,13 +278,6 @@ class Main extends Component {
                 {/* All of project goes here */}
               </div>
               <br />
-
-              {/* Submit button to go to custom Qualtrics survey link for the post-survey */}
-              <a href={this.state.queryString} target="_blank">
-                <Button disabled={this.state.disabledButton} color='orange' floated='right' onClick={this.handleEnd} >
-                  Take Survey!
-                </Button>
-              </a>
 
             </div>
 
