@@ -181,6 +181,7 @@ class Main extends Component {
                       <Person 
                         title={"Tim"} 
                         pwds={this.userPasswords[0]}
+                        pic={"/tim.png"}
                         description={"Uses common passwords"} 
                         strategyHardness={this.state.strategyHardness}/>
                     </Grid.Column>
@@ -188,6 +189,7 @@ class Main extends Component {
                       <Person 
                         title={"Nim"} 
                         pwds={this.userPasswords[1]}
+                        pic={"/nim.png"}
                         description={"Reuses their password"} 
                         strategyHardness={this.state.strategyHardness}/>
                     </Grid.Column>
@@ -195,6 +197,7 @@ class Main extends Component {
                       <Person 
                         title={"Jim"} 
                         pwds={this.userPasswords[2]}
+                        pic={"/jim.png"}
                         description={"Remembers all their passwords"}
                         strategyHardness={this.state.strategyHardness}/>
                     </Grid.Column>
@@ -202,6 +205,7 @@ class Main extends Component {
                       <Person 
                         title={"Kim"} 
                         pwds={this.userPasswords[3]}
+                        pic={"/kim.png"}
                         description={"Uses a password manager"}
                         strategyHardness={this.state.strategyHardness}/>
                     </Grid.Column>

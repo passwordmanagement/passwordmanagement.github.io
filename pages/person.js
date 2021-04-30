@@ -1,4 +1,4 @@
-import Head from 'next/head'
+import Image from 'next/image'
 import React, { Component } from 'react'
 import styles from '../styles/Home.module.css'
 import { Button, Checkbox, Progress, Segment } from 'semantic-ui-react'
@@ -170,6 +170,7 @@ export default class Person extends Component {
         return (
             <div className={styles.card}>
                 <h3>{this.props.title}</h3>
+                <Image src={this.props.pic} alt="picture of person" width="64" height="64" />
                 <p>{this.props.description}</p>
                 <br />
 
