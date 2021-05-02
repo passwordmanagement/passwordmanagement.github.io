@@ -115,7 +115,6 @@ class Main extends Component {
 
   componentDidMount() {
     this.setState({
-      start: true,
       startTime: Date.now()
     })
   }
