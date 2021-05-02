@@ -123,7 +123,7 @@ class Main extends Component {
 
   handleEnd() {
     // Create Qualtrics Query String
-    var link = "https://qfreeaccountssjc1.az1.qualtrics.com/jfe/form/SV_bvaYyAChZUQuirA?";
+    var link = "https://uchicago.co1.qualtrics.com/jfe/form/SV_1QT8ZXQnm6r3HPE?";
 
     link += "&TimeSpent=" + ((Date.now() - this.state.startTime) / 1000).toString();
     this.setState({
