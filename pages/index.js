@@ -32,7 +32,6 @@ class Main extends Component {
       allowRevealAllPasswords: 1,
     }
 
-    this.handleStart = this.handleStart.bind(this);
     this.handleEnd = this.handleEnd.bind(this);
 
     this.hackingOption = this.hackingOption.bind(this); 
